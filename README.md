@@ -4,7 +4,7 @@
 
 O LAB 6 foi implementado com multi-stage build, .dockerignore, usuário non-root e labels padrão, validando práticas de otimização Docker.
 
-Dockerfile implementado:
+Dockerfile implementado:  
 
 ```text
 FROM node:22-bookworm AS build
@@ -62,7 +62,9 @@ Dockerfile
 Comandos executados:
 
 ```bash
+# Para gerar a imagem.
 docker build -t hexxa_test_docker:1.0.0 .
 
-docker run -p 8080:80 hexxa_test_docker:1.0.0
+# Para criar/executar o container com a imagem criada e redirecinando a porta interna 80 para 8080 externa.
+docker run -p 8080:80 hexxa_test_docker:1.0.0 
 ```
