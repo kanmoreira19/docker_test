@@ -1,0 +1,33 @@
+version: "5.0"  
+
+services:
+  web:  
+    image: hexxa_test_docker:1.0.1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 256M
+
+    ports:
+      - "8080:80"          
+    volumes:
+      - ./html:/var/www/html:rw
+    networks:
+      - hexxatest
+
+  redis:
+    image: redis:8.4
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hexxatest
+    command: redis-server --appendonly yes
+
+volumes:
+  redis_data:
+networks:
+  hexxatest:
+    driver: bridge
