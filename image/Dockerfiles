@@ -1,0 +1,49 @@
+FROM debian:12
+
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+ENV APACHE_LOCK_DIR="/var/lock"
+ENV APACHE_PID_FILE="/var/run/apache2.pid"
+ENV APACHE_RUN_USER="webuser"
+ENV APACHE_RUN_GROUP="webuser"
+ENV APACHE_LOG_DIR="/var/log/apache2"
+
+COPY index.html /var/www/html/
+
+LABEL title="Apache Hexxa"
+LABEL description="webserver"
+LABEL version="1.0.0"
+LABEL authors="Kleyton de Andrade <kanm@outlook.com.br>"
+
+RUN groupadd -g 1001 webgroup \
+    && useradd -u 1001 -g webgroup -d /var/www -s /usr/sbin/nologin webuser
+
+USER webuser
+
+VOLUME /var/www/html/
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/sbin/apachectl"]
+CMD ["-D","FOREGROUND"]
+
+
+FROM postgres:17
+
+LABEL title="PostgresSQL Hexxa"
+LABEL description="BD Postgres"
+LABEL version="1.0.0"
+LABEL authors="Kleyton de Andrade <kanm@outlook.com.br>"
+
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/17/bin"
+ENV GOSU_VERSION="1.19"
+ENV LANG="en_US.utf8",
+ENV PG_MAJOR="17",
+ENV PG_VERSION="17.7-3.pgdg13+1",
+ENV PGDATA="/var/lib/postgresql/data"
+ENV POSTGRESQL_USER="postgres"
+ENV POSTGRES_PASSWORD="postgres"
+ENV POSTGRESQL_DB="postgres"
+
+USER postgres
+
+VOLUME /var/lib/postgresql/data
+EXPOSE 5432

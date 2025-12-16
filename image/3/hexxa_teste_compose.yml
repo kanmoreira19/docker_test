@@ -1,0 +1,40 @@
+version: "5.0"  
+
+services:
+  web:  
+    image: hexxa_test_docker:1.0.3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 256M
+
+    ports:
+      - "8081:80"          
+    volumes:
+      - ./html:/var/www/html:rw
+    networks:
+      - webserver
+
+  db:
+    image: postgres:17
+    container_name: postgres17
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: docker
+      TZ: America/Sao_Paulo
+
+    ports:
+        - "5432:5432"
+
+    volumes:
+      - dbdata:/var/lib/postgresql/data:rw
+
+volumes:
+  dbdata:
+
+networks:
+  webserver:  

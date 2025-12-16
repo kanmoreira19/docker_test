@@ -1,0 +1,20 @@
+version: "5.0"  
+
+services:
+  web:  
+    image: hexxa_test_docker:1.0.1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 256M
+
+    ports:
+      - "8081:80"          
+    volumes:
+      - ./html:/var/www/html:rw
+    networks:
+      - webserver
+
+networks:
+  webserver:  
