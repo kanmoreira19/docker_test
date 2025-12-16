@@ -1,5 +1,7 @@
 # Docker Test
+
 ## LAB 6: Imagem Docker Otimizada
+
 O LAB 6 foi implementado com multi-stage build, .dockerignore, usuário non-root e labels padrão, validando práticas de otimização Docker.
 
 Dockerfile implementado:
