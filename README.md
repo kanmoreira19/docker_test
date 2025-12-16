@@ -63,4 +63,4 @@ Comandos executados:
 docker build -t hexxa_test_docker:1.0.0 .
 
 docker run -p 8080:80 hexxa_test_docker:1.0.0
-``
+```
