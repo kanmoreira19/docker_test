@@ -19,10 +19,10 @@ ENV APACHE_LOG_DIR="/var/log/apache2"
 
 COPY index.html /var/www/html/
 
-LABEL title="Apache Hexxa"
+LABEL title="Apache_Hexxa"
 LABEL description="webserver"
 LABEL version="1.0.0"
-LABEL authors="Kleyton de Andrade <kanm@outlook.com.br>"
+LABEL authors="Kleyton de Andrade <kanmoreira@gmail.com>"
 
 RUN mkdir -p /var/www/html /var/log/apache2 /var/run/apache2 \
     && chown -R www-data:www-data /var/www/html /var/log/apache2 /var/run/apache2 \
